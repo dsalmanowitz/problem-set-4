@@ -21,7 +21,16 @@
 public class ProblemSet4 {
 	
 	public static void main(String[] args) {
-		
+		ProblemSet4 ps4 = new ProblemSet4();
+		//ps4.surroundMe("AABB", "XYZ");
+		//ps4.endsMeet("adios", 2);
+		//ps4.middleMan("adios");
+		//ps4.doubleVision("adios");
+		//ps4.centered("DENNIS", "ENN");
+		//ps4.upOrDown(1.5, 'r');
+		//ps4.countMe("Jerry hay boy", 'y');
+		//ps4.isNotEqual("is not is not is");
+		ps4.triplets("aaabbcc");
 	}
 	
 	/**
@@ -30,7 +39,7 @@ public class ProblemSet4 {
 	 * 
 	 * Given two Strings, @out and @in, return a new String built by surrounding @in
 	 * with the first and last two characters of @out. Return null if the input
-	 * specifcations are not met.
+	 * specifications are not met.
 	 * 
 	 * @param out - a 4-character String of the format AABB
 	 * @param in - a 3-character String of the format XYZ
@@ -38,7 +47,15 @@ public class ProblemSet4 {
 	 * @return a String constructed from @in and @out of the format AAXYZBB
 	 */
 	
-	// your method signature here
+	public String surroundMe(String out, String in) {
+		String result = out.substring(0, 2) + in + out.substring(2, 4);
+		if (out.length() == 4 && in.length() == 3) {
+			return result;
+		}
+		else {
+			return null;
+		}
+	}
 	
 	/**
 	 * @endsMeet is a public method that accepts a String and an integer as input, and
@@ -54,7 +71,13 @@ public class ProblemSet4 {
 	 * @return a String constructed from the first @n and last @n characters of @str
 	 */
 	
-	// your method signature here
+	public String endsMeet(String str, int n) {
+		if (str.length() < 1 || str.length() > 10 || n > str.length()) {
+			return null;
+		} else {
+			return str.substring(0, n) + str.substring(str.length() - n);
+		}
+	}
 	
 	/**
 	 * @middleMan is a public method that accepts a single String as input, and
@@ -69,7 +92,15 @@ public class ProblemSet4 {
 	 * @return a 3-character String constructed from the middle 3 characters of @str
 	 */
 	
-	// your method signature here
+	public String middleMan(String str) {
+		int n;
+		if (str.length() % 2 == 1) {
+			n = str.length() / 2;
+			return str.substring(n - 1, n + 2);
+		} else {
+			return null;
+		}
+	}
 	
 	/**
 	 * @doubleVision is a public method that accepts a single String as input, and
@@ -77,14 +108,25 @@ public class ProblemSet4 {
 	 * 
 	 * Given a String whose length is at least 1, return a String built from duplicating
 	 * every character from the original String. Return null if the input
-	 * specifcations are not met.
+	 * Specifications are not met.
 	 * 
 	 * @param str - a String whose length is at least 1 in the format ABC
 	 * 
 	 * @return a String where each character in @str is duplicated in the format AABBCC
 	 */
 	
-	// your method signature here
+	public String doubleVision(String str) {
+		String duplicate = "";
+		if (str.length() > 1) {
+			for (int i = 0; i < str.length(); i++) {
+				String c = str.charAt(i) + "";
+				duplicate += (c + c);
+			}
+			return duplicate;
+		} else {
+			return null;
+		}
+	}
 	
 	/**
 	 * @centered is a public method that accepts a single String as input, and
@@ -101,7 +143,24 @@ public class ProblemSet4 {
 	 * @return true if @target is in the middle of @str and false if it is not
 	 */
 	
-	// your method signature here
+	public boolean centered(String str, String target) {
+		int mid = str.length()/2;
+		if (target.length() != 3) {
+			return false;
+		} else if (str.length() % 2 == 1) {
+			if (str.substring(mid - 1, mid + 2).equals(target)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (str.substring(mid - 1, mid + 2).equals(target) || str.substring(mid - 2, mid + 1).equals(target)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
 	
 	/**
 	 * @upOrDown is a public method that accepts a decimal value and a character as
@@ -117,8 +176,18 @@ public class ProblemSet4 {
 	 * @return the result of the operation as an @int
 	 */
 	
-	// your method signature here
-	
+	public int upOrDown(double number, char operation) {
+		if (operation == 'c') {
+			return (int)Math.ceil(number);
+		} else if (operation == 'f') {
+			return (int)Math.floor(number);
+		} else if (operation == 'r') {
+			return (int)Math.round(number);
+		} else {
+			return -1;
+		}
+	}
+	 
 	/**
 	 * @countMe is a public method that accepts a String and a character as input,
 	 * and returns an integer as output.
@@ -135,7 +204,27 @@ public class ProblemSet4 {
 	 * @return the number of words in @text that end with @end
 	 */
 	
-	// your method signature here
+	public int countMe(String text, char end) {
+		int count = 0;
+		for (int i = 0; i < text.length() - 1; i++) {
+			if (text.charAt(i+1) == ' ' || text.charAt(i+1) == '\t' || text.charAt(i+1) == '\n') {
+				if (text.charAt(i) == end) {
+					count++;
+				}
+			}
+			if (!Character.isAlphabetic(text.charAt(i)) && !Character.isWhitespace(text.charAt(i))) {
+				return -1;
+			}
+		}
+		if (text.charAt(text.length()-1) == end) {
+			count++;
+		}
+		if (Character.isAlphabetic(end)) {
+			return count;
+		} else {
+			return -1;
+		}
+	}
 	
 	/**
 	 * @isNotEqual is a public method that accepts a String as input, and
@@ -150,7 +239,31 @@ public class ProblemSet4 {
 	 * @return true if the appearances of is == the appearances of not; false otherwise
 	 */
 	
-	// your method signature here
+	public boolean isNotEqual(String str) {
+		int countIs = 0;
+		int countNot = 0;
+		for (int i = 0; i < str.length() - 2; i++) {
+			if (str.substring(i, i + 2).equals("is")) {
+				countIs++;
+			}
+		}
+		for (int j = 0; j < str.length() - 3; j++) {
+			if (str.substring(j, j + 3).equals("not")) {
+				countNot++;
+			}
+		}
+		if (str.substring(str.length() - 2).equals("is")) {
+			countIs++;
+		} else if (str.substring(str.length() - 3).equals("not")) {
+			countNot++;
+		}
+		if (countIs == countNot) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	
 	/**
 	 * @triplets is a public method that accepts a single String as input, and
@@ -166,7 +279,22 @@ public class ProblemSet4 {
 	 * @return the number of triplets in @str
 	 */
 	
-	// your method signature here
+	public int triplets(String str) {
+		int count = 0;
+		for (int i = 0; i < str.length() - 2; i++) {
+			if (str.charAt(i) == str.charAt(i++) && str.charAt(i) == str.charAt(i+2)) {
+				count++;
+			} else if (!Character.isAlphabetic(str.charAt(i))) {
+				return -1;
+			}
+		}
+		if (str.charAt(str.length() - 1) == str.charAt(str.length() - 2) && str.charAt(str.length() - 2) == str.charAt(str.length() - 3)) {
+			count++;
+		}
+		System.out.print(count);
+		return count;
+	}
+
 	
 	/**
 	 * @addMe is a public method that accepts a String and a boolean as input, and
