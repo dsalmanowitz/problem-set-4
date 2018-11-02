@@ -22,15 +22,16 @@ public class ProblemSet4 {
 	
 	public static void main(String[] args) {
 		ProblemSet4 ps4 = new ProblemSet4();
-		//ps4.surroundMe("AABB", "XYZ");
-		//ps4.endsMeet("adios", 2);
-		//ps4.middleMan("adios");
-		//ps4.doubleVision("adios");
-		//ps4.centered("DENNIS", "ENN");
-		//ps4.upOrDown(1.5, 'r');
-		//ps4.countMe("Jerry hay boy", 'y');
-		//ps4.isNotEqual("is not is not is");
-		ps4.triplets("aaabbcc");
+		ps4.surroundMe("[[]]", "XYZ");
+		ps4.endsMeet("qwerty", 2);
+		ps4.middleMan("adios");
+		ps4.doubleVision("adios");
+		ps4.centered("ENN", "ENN");
+		ps4.upOrDown(1.5, 'r');
+		ps4.countMe("Jerry hay boy", 'y');
+		ps4.isNotEqual("is not is not is");
+		ps4.triplets("aaabbbb");
+		ps4.addMe("1aa15b12b", false);
 	}
 	
 	/**
@@ -72,6 +73,7 @@ public class ProblemSet4 {
 	 */
 	
 	public String endsMeet(String str, int n) {
+		
 		if (str.length() < 1 || str.length() > 10 || n > str.length()) {
 			return null;
 		} else {
@@ -117,7 +119,7 @@ public class ProblemSet4 {
 	
 	public String doubleVision(String str) {
 		String duplicate = "";
-		if (str.length() > 1) {
+		if (str.length() > 0) {
 			for (int i = 0; i < str.length(); i++) {
 				String c = str.charAt(i) + "";
 				duplicate += (c + c);
@@ -145,7 +147,7 @@ public class ProblemSet4 {
 	
 	public boolean centered(String str, String target) {
 		int mid = str.length()/2;
-		if (target.length() != 3) {
+		if (target.length() != 3 || str.length() < 3) {
 			return false;
 		} else if (str.length() % 2 == 1) {
 			if (str.substring(mid - 1, mid + 2).equals(target)) {
@@ -281,17 +283,17 @@ public class ProblemSet4 {
 	
 	public int triplets(String str) {
 		int count = 0;
-		for (int i = 0; i < str.length() - 2; i++) {
-			if (str.charAt(i) == str.charAt(i++) && str.charAt(i) == str.charAt(i+2)) {
+		for (int i = 0; i < str.length() - 3; i++) {
+			if (str.charAt(i) == str.charAt(i+1) && str.charAt(i) == str.charAt(i+2)) {
 				count++;
-			} else if (!Character.isAlphabetic(str.charAt(i))) {
+			} 
+			if (!Character.isAlphabetic(str.charAt(i))) {
 				return -1;
 			}
 		}
 		if (str.charAt(str.length() - 1) == str.charAt(str.length() - 2) && str.charAt(str.length() - 2) == str.charAt(str.length() - 3)) {
 			count++;
 		}
-		System.out.print(count);
 		return count;
 	}
 
@@ -311,5 +313,34 @@ public class ProblemSet4 {
 	 * @return the sum of the digits or numbers as specified by @digits
 	 */
 	
-	// your method signature here
+	public int addMe(String str, boolean digits) {
+		int sum = 0;
+		int value = 0;
+		if (digits == true) {
+			for (int i = 0; i < str.length(); i++) {
+				if (Character.isDigit(str.charAt(i))) {
+					sum += Character.getNumericValue(str.charAt(i));
+				}
+				if (!Character.isDigit(str.charAt(i)) && !Character.isAlphabetic(str.charAt(i))) {
+					return -1;
+				}
+			}
+		}
+		else if (digits == false) {
+			for (int j = 0; j < str.length(); j++) {
+				if (Character.isDigit(str.charAt(j))) {
+					if (j > 0 && Character.isDigit(str.charAt(j-1))) {
+						value *= 10;
+					}
+					value += Character.getNumericValue(str.charAt(j));
+				}
+				else if (Character.isAlphabetic(str.charAt(j)) ) {
+					sum += value;
+					value = 0;
+				}
+			}
+			sum += value;
+		}
+		return sum;
+	}
 }
