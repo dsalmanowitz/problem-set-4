@@ -49,6 +49,9 @@ public class ProblemSet4 {
 	 */
 	
 	public String surroundMe(String out, String in) {
+		if (out.equals(null) || in.equals(null)) {
+			return -1;
+		}
 		String result = out.substring(0, 2) + in + out.substring(2, 4);
 		if (out.length() == 4 && in.length() == 3) {
 			return result;
@@ -73,7 +76,9 @@ public class ProblemSet4 {
 	 */
 	
 	public String endsMeet(String str, int n) {
-		
+		if (str.equals(null)) {
+			return -1;
+		}
 		if (str.length() < 1 || str.length() > 10 || n > str.length()) {
 			return null;
 		} else {
@@ -96,6 +101,9 @@ public class ProblemSet4 {
 	
 	public String middleMan(String str) {
 		int n;
+		if (str.equals(null)) {
+			return -1;
+		}
 		if (str.length() % 2 == 1) {
 			n = str.length() / 2;
 			return str.substring(n - 1, n + 2);
@@ -119,6 +127,9 @@ public class ProblemSet4 {
 	
 	public String doubleVision(String str) {
 		String duplicate = "";
+		if (str.equals(null)) {
+			return -1;
+		}
 		if (str.length() > 0) {
 			for (int i = 0; i < str.length(); i++) {
 				String c = str.charAt(i) + "";
@@ -146,6 +157,9 @@ public class ProblemSet4 {
 	 */
 	
 	public boolean centered(String str, String target) {
+		if (str.equals(null)) {
+			return -1;
+		}
 		int mid = str.length()/2;
 		if (target.length() != 3 || str.length() < 3) {
 			return false;
@@ -208,6 +222,9 @@ public class ProblemSet4 {
 	
 	public int countMe(String text, char end) {
 		int count = 0;
+		if (text.equals(null)) {
+			return -1;
+		}
 		for (int i = 0; i < text.length() - 1; i++) {
 			if (text.charAt(i+1) == ' ' || text.charAt(i+1) == '\t' || text.charAt(i+1) == '\n') {
 				if (text.charAt(i) == end) {
@@ -244,6 +261,9 @@ public class ProblemSet4 {
 	public boolean isNotEqual(String str) {
 		int countIs = 0;
 		int countNot = 0;
+		if (str.equals(null)) {
+			return -1;
+		}
 		for (int i = 0; i < str.length() - 2; i++) {
 			if (str.substring(i, i + 2).equals("is")) {
 				countIs++;
@@ -283,6 +303,9 @@ public class ProblemSet4 {
 	
 	public int triplets(String str) {
 		int count = 0;
+		if (str.equals(null)) {
+			return -1;
+		}
 		for (int i = 0; i < str.length() - 3; i++) {
 			if (str.charAt(i) == str.charAt(i+1) && str.charAt(i) == str.charAt(i+2)) {
 				count++;
@@ -316,6 +339,9 @@ public class ProblemSet4 {
 	public int addMe(String str, boolean digits) {
 		int sum = 0;
 		int value = 0;
+		if (str.equals(null)) {
+			return -1;
+		}
 		if (digits == true) {
 			for (int i = 0; i < str.length(); i++) {
 				if (Character.isDigit(str.charAt(i))) {
@@ -337,6 +363,9 @@ public class ProblemSet4 {
 				else if (Character.isAlphabetic(str.charAt(j)) ) {
 					sum += value;
 					value = 0;
+				}
+				else {
+					return -1;
 				}
 			}
 			sum += value;
